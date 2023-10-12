@@ -1,0 +1,84 @@
+INSERT INTO db_sharing_eksekusi.pihak (
+id
+,pa_id
+,jenis_pihak_id
+,jenis_indentitas
+,nomor_indentitas
+,nama
+,tempat_lahir
+,tanggal_lahir
+,jenis_kelamin
+,golongan_darah
+,alamat
+,rtrw
+,kelurahan
+,kecamatan
+,kabupaten_id
+,kabupaten
+,propinsi_id
+,propinsi
+,telepon
+,fax
+,email
+,agama_id
+,agama_nama
+,status_kawin
+,pekerjaan
+,pendidikan_id
+,pendidikan
+,warga_negara_id
+,warga_negara
+,nama_ayah
+,nama_ibu
+,keterangan
+,foto
+,difabel
+,diedit_oleh
+,diedit_tanggal
+,diinput_oleh
+,diinput_tanggal
+,diperbaharui_oleh
+,diperbaharui_tanggal
+)
+
+SELECT	id
+	,476
+	,jenis_pihak_id
+	,jenis_indentitas
+	,nomor_indentitas
+	,nama
+	,tempat_lahir
+	,tanggal_lahir
+	,jenis_kelamin
+	,golongan_darah
+	,alamat
+	,rtrw
+	,kelurahan
+	,kecamatan
+	,kabupaten_id
+	,kabupaten
+	,propinsi_id
+	,propinsi
+	,telepon
+	,fax
+	,email
+	,agama_id
+	,agama_nama
+	,status_kawin
+	,pekerjaan
+	,pendidikan_id
+	,pendidikan
+	,warga_negara_id
+	,warga_negara
+	,nama_ayah
+	,nama_ibu
+	,keterangan
+	,foto
+	,difabel
+	,diedit_oleh
+	,diedit_tanggal
+	,diinput_oleh
+	,diinput_tanggal
+	,diperbaharui_oleh
+	,diperbaharui_tanggal
+FROM sipp.pihak WHERE id IN (SELECT pihak_id FROM sipp.perkara_eksekusi_detil UNION select pihak_id FROM perkara_eksekusi_detil_ht)	

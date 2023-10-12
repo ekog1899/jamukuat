@@ -1,0 +1,89 @@
+<?php defined('BASEPATH') OR exit('No direct script access allowed'); ?>
+
+ERROR - 2023-06-15 09:08:59 --> Severity: 4096 --> Object of class CI_DB_mysqli_result could not be converted to string /home/www/html/jamukuat/application/controllers/Dashboard.php 209
+ERROR - 2023-06-15 09:09:21 --> Severity: 4096 --> Object of class CI_DB_mysqli_result could not be converted to string /home/www/html/jamukuat/application/controllers/Dashboard.php 209
+ERROR - 2023-06-15 09:09:29 --> Severity: 4096 --> Object of class CI_DB_mysqli_result could not be converted to string /home/www/html/jamukuat/application/controllers/Dashboard.php 209
+ERROR - 2023-06-15 09:09:40 --> Severity: 4096 --> Object of class CI_DB_mysqli_result could not be converted to string /home/www/html/jamukuat/application/controllers/Dashboard.php 209
+ERROR - 2023-06-15 09:10:00 --> Severity: 4096 --> Object of class CI_DB_mysqli_result could not be converted to string /home/www/html/jamukuat/application/controllers/Dashboard.php 209
+ERROR - 2023-06-15 09:10:21 --> Severity: 4096 --> Object of class CI_DB_mysqli_result could not be converted to string /home/www/html/jamukuat/application/controllers/Dashboard.php 209
+ERROR - 2023-06-15 09:10:28 --> Severity: 4096 --> Object of class CI_DB_mysqli_result could not be converted to string /home/www/html/jamukuat/application/controllers/Dashboard.php 209
+ERROR - 2023-06-15 09:11:08 --> Severity: 4096 --> Object of class CI_DB_mysqli_result could not be converted to string /home/www/html/jamukuat/application/controllers/Dashboard.php 209
+ERROR - 2023-06-15 09:11:18 --> Severity: 4096 --> Object of class CI_DB_mysqli_result could not be converted to string /home/www/html/jamukuat/application/controllers/Dashboard.php 209
+ERROR - 2023-06-15 09:11:30 --> Severity: 4096 --> Object of class CI_DB_mysqli_result could not be converted to string /home/www/html/jamukuat/application/controllers/Dashboard.php 209
+ERROR - 2023-06-15 09:11:38 --> Severity: 4096 --> Object of class CI_DB_mysqli_result could not be converted to string /home/www/html/jamukuat/application/controllers/Dashboard.php 209
+ERROR - 2023-06-15 09:11:48 --> Severity: 4096 --> Object of class CI_DB_mysqli_result could not be converted to string /home/www/html/jamukuat/application/controllers/Dashboard.php 209
+ERROR - 2023-06-15 09:12:11 --> Severity: 4096 --> Object of class CI_DB_mysqli_result could not be converted to string /home/www/html/jamukuat/application/controllers/Dashboard.php 209
+ERROR - 2023-06-15 09:12:30 --> Severity: 4096 --> Object of class CI_DB_mysqli_result could not be converted to string /home/www/html/jamukuat/application/controllers/Dashboard.php 209
+ERROR - 2023-06-15 09:12:33 --> Severity: 4096 --> Object of class CI_DB_mysqli_result could not be converted to string /home/www/html/jamukuat/application/controllers/Dashboard.php 209
+ERROR - 2023-06-15 09:12:42 --> Severity: 4096 --> Object of class CI_DB_mysqli_result could not be converted to string /home/www/html/jamukuat/application/controllers/Dashboard.php 209
+ERROR - 2023-06-15 09:13:00 --> Severity: 4096 --> Object of class CI_DB_mysqli_result could not be converted to string /home/www/html/jamukuat/application/controllers/Dashboard.php 209
+ERROR - 2023-06-15 09:13:04 --> Severity: 4096 --> Object of class CI_DB_mysqli_result could not be converted to string /home/www/html/jamukuat/application/controllers/Dashboard.php 209
+ERROR - 2023-06-15 09:13:14 --> Severity: 4096 --> Object of class CI_DB_mysqli_result could not be converted to string /home/www/html/jamukuat/application/controllers/Dashboard.php 209
+ERROR - 2023-06-15 09:13:22 --> Severity: 4096 --> Object of class CI_DB_mysqli_result could not be converted to string /home/www/html/jamukuat/application/controllers/Dashboard.php 209
+ERROR - 2023-06-15 09:13:37 --> Severity: 4096 --> Object of class CI_DB_mysqli_result could not be converted to string /home/www/html/jamukuat/application/controllers/Dashboard.php 209
+ERROR - 2023-06-15 09:13:52 --> Severity: 4096 --> Object of class CI_DB_mysqli_result could not be converted to string /home/www/html/jamukuat/application/controllers/Dashboard.php 209
+ERROR - 2023-06-15 09:14:05 --> Severity: 4096 --> Object of class CI_DB_mysqli_result could not be converted to string /home/www/html/jamukuat/application/controllers/Dashboard.php 209
+ERROR - 2023-06-15 09:14:20 --> Severity: 4096 --> Object of class CI_DB_mysqli_result could not be converted to string /home/www/html/jamukuat/application/controllers/Dashboard.php 209
+ERROR - 2023-06-15 09:14:56 --> Severity: 4096 --> Object of class CI_DB_mysqli_result could not be converted to string /home/www/html/jamukuat/application/controllers/Dashboard.php 209
+ERROR - 2023-06-15 09:15:06 --> Severity: 4096 --> Object of class CI_DB_mysqli_result could not be converted to string /home/www/html/jamukuat/application/controllers/Dashboard.php 209
+ERROR - 2023-06-15 09:15:12 --> Severity: 4096 --> Object of class CI_DB_mysqli_result could not be converted to string /home/www/html/jamukuat/application/controllers/Dashboard.php 209
+ERROR - 2023-06-15 09:15:20 --> Severity: 4096 --> Object of class CI_DB_mysqli_result could not be converted to string /home/www/html/jamukuat/application/controllers/Dashboard.php 209
+ERROR - 2023-06-15 09:39:40 --> Severity: 4096 --> Object of class CI_DB_mysqli_result could not be converted to string /home/www/html/jamukuat/application/controllers/Kua.php 46
+ERROR - 2023-06-15 09:44:16 --> Severity: 4096 --> Object of class CI_DB_mysqli_result could not be converted to string /home/www/html/jamukuat/application/controllers/Dashboard.php 209
+ERROR - 2023-06-15 09:45:06 --> Severity: 4096 --> Object of class CI_DB_mysqli_result could not be converted to string /home/www/html/jamukuat/application/controllers/Dashboard.php 209
+ERROR - 2023-06-15 09:49:23 --> Severity: 4096 --> Object of class CI_DB_mysqli_result could not be converted to string /home/www/html/jamukuat/application/controllers/Dashboard.php 209
+ERROR - 2023-06-15 09:49:32 --> Severity: 4096 --> Object of class CI_DB_mysqli_result could not be converted to string /home/www/html/jamukuat/application/controllers/Dashboard.php 209
+ERROR - 2023-06-15 09:50:29 --> Severity: 4096 --> Object of class CI_DB_mysqli_result could not be converted to string /home/www/html/jamukuat/application/controllers/Dashboard.php 209
+ERROR - 2023-06-15 09:54:32 --> Severity: 4096 --> Object of class CI_DB_mysqli_result could not be converted to string /home/www/html/jamukuat/application/controllers/Dashboard.php 209
+ERROR - 2023-06-15 10:08:50 --> Severity: 4096 --> Object of class CI_DB_mysqli_driver could not be converted to string /home/www/html/jamukuat/application/models/Mitra_model.php 47
+ERROR - 2023-06-15 10:08:50 --> Severity: 4096 --> Object of class CI_DB_mysqli_driver could not be converted to string /home/www/html/jamukuat/application/models/Mitra_model.php 48
+ERROR - 2023-06-15 10:08:50 --> Severity: 4096 --> Object of class CI_DB_mysqli_driver could not be converted to string /home/www/html/jamukuat/application/models/Mitra_model.php 49
+ERROR - 2023-06-15 10:08:50 --> Severity: 4096 --> Object of class CI_DB_mysqli_driver could not be converted to string /home/www/html/jamukuat/application/models/Mitra_model.php 149
+ERROR - 2023-06-15 10:08:50 --> Severity: 4096 --> Object of class CI_DB_mysqli_driver could not be converted to string /home/www/html/jamukuat/application/models/Mitra_model.php 150
+ERROR - 2023-06-15 10:08:50 --> Severity: 4096 --> Object of class CI_DB_mysqli_driver could not be converted to string /home/www/html/jamukuat/application/models/Mitra_model.php 151
+ERROR - 2023-06-15 10:10:06 --> Severity: 4096 --> Object of class CI_DB_mysqli_result could not be converted to string /home/www/html/jamukuat/application/controllers/Kua.php 46
+ERROR - 2023-06-15 10:10:27 --> Severity: 4096 --> Object of class CI_DB_mysqli_result could not be converted to string /home/www/html/jamukuat/application/controllers/Kua.php 46
+ERROR - 2023-06-15 10:14:41 --> Severity: 4096 --> Object of class CI_DB_mysqli_result could not be converted to string /home/www/html/jamukuat/application/controllers/Kua.php 46
+ERROR - 2023-06-15 10:15:32 --> Severity: 4096 --> Object of class CI_DB_mysqli_result could not be converted to string /home/www/html/jamukuat/application/controllers/Kua.php 46
+ERROR - 2023-06-15 10:15:37 --> Severity: 4096 --> Object of class CI_DB_mysqli_result could not be converted to string /home/www/html/jamukuat/application/controllers/Kua.php 46
+ERROR - 2023-06-15 10:15:40 --> Severity: 4096 --> Object of class CI_DB_mysqli_result could not be converted to string /home/www/html/jamukuat/application/controllers/Kua.php 46
+ERROR - 2023-06-15 10:17:19 --> Severity: 4096 --> Object of class CI_DB_mysqli_result could not be converted to string /home/www/html/jamukuat/application/controllers/Kua.php 46
+ERROR - 2023-06-15 10:17:37 --> Severity: 4096 --> Object of class CI_DB_mysqli_result could not be converted to string /home/www/html/jamukuat/application/controllers/Dashboard.php 209
+ERROR - 2023-06-15 10:35:28 --> Severity: 4096 --> Object of class CI_DB_mysqli_result could not be converted to string /home/www/html/jamukuat/application/controllers/Dashboard.php 498
+ERROR - 2023-06-15 10:36:43 --> Severity: 4096 --> Object of class CI_DB_mysqli_result could not be converted to string /home/www/html/jamukuat/application/controllers/Dashboard.php 209
+ERROR - 2023-06-15 10:36:56 --> Severity: 4096 --> Object of class CI_DB_mysqli_result could not be converted to string /home/www/html/jamukuat/application/controllers/Dashboard.php 209
+ERROR - 2023-06-15 10:58:06 --> Severity: 4096 --> Object of class CI_DB_mysqli_result could not be converted to string /home/www/html/jamukuat/application/controllers/Dashboard.php 209
+ERROR - 2023-06-15 10:58:24 --> Severity: 4096 --> Object of class CI_DB_mysqli_result could not be converted to string /home/www/html/jamukuat/application/controllers/Dashboard.php 209
+ERROR - 2023-06-15 10:59:28 --> Severity: 4096 --> Object of class CI_DB_mysqli_result could not be converted to string /home/www/html/jamukuat/application/controllers/Dashboard.php 209
+ERROR - 2023-06-15 10:59:40 --> Severity: 4096 --> Object of class CI_DB_mysqli_result could not be converted to string /home/www/html/jamukuat/application/controllers/Dashboard.php 209
+ERROR - 2023-06-15 11:00:11 --> Severity: 4096 --> Object of class CI_DB_mysqli_result could not be converted to string /home/www/html/jamukuat/application/controllers/Dashboard.php 209
+ERROR - 2023-06-15 11:00:24 --> Severity: 4096 --> Object of class CI_DB_mysqli_result could not be converted to string /home/www/html/jamukuat/application/controllers/Dashboard.php 209
+ERROR - 2023-06-15 11:00:37 --> Severity: 4096 --> Object of class CI_DB_mysqli_result could not be converted to string /home/www/html/jamukuat/application/controllers/Dashboard.php 209
+ERROR - 2023-06-15 11:04:54 --> Severity: 4096 --> Object of class CI_DB_mysqli_result could not be converted to string /home/www/html/jamukuat/application/controllers/Dashboard.php 209
+ERROR - 2023-06-15 11:05:14 --> Severity: 4096 --> Object of class CI_DB_mysqli_result could not be converted to string /home/www/html/jamukuat/application/controllers/Dashboard.php 209
+ERROR - 2023-06-15 11:16:26 --> Severity: 4096 --> Object of class CI_DB_mysqli_result could not be converted to string /home/www/html/jamukuat/application/controllers/Dashboard.php 209
+ERROR - 2023-06-15 11:17:42 --> Severity: 4096 --> Object of class CI_DB_mysqli_result could not be converted to string /home/www/html/jamukuat/application/controllers/Dashboard.php 209
+ERROR - 2023-06-15 11:26:27 --> 404 Page Not Found: Uploads/pengamanan
+ERROR - 2023-06-15 11:26:27 --> 404 Page Not Found: Uploads/pengamanan
+ERROR - 2023-06-15 11:27:39 --> 404 Page Not Found: Uploads/pengamanan
+ERROR - 2023-06-15 11:27:39 --> 404 Page Not Found: Uploads/pengamanan
+ERROR - 2023-06-15 11:54:02 --> Severity: 4096 --> Object of class CI_DB_mysqli_result could not be converted to string /home/www/html/jamukuat/application/controllers/Kua.php 46
+ERROR - 2023-06-15 11:55:17 --> Severity: 4096 --> Object of class CI_DB_mysqli_result could not be converted to string /home/www/html/jamukuat/application/controllers/Kua.php 46
+ERROR - 2023-06-15 11:55:31 --> Severity: 4096 --> Object of class CI_DB_mysqli_result could not be converted to string /home/www/html/jamukuat/application/controllers/Kua.php 46
+ERROR - 2023-06-15 11:55:56 --> Severity: 4096 --> Object of class CI_DB_mysqli_result could not be converted to string /home/www/html/jamukuat/application/controllers/Kua.php 46
+ERROR - 2023-06-15 11:55:57 --> Severity: 4096 --> Object of class CI_DB_mysqli_result could not be converted to string /home/www/html/jamukuat/application/controllers/Kua.php 46
+ERROR - 2023-06-15 12:12:37 --> Severity: 4096 --> Object of class CI_DB_mysqli_result could not be converted to string /home/www/html/jamukuat/application/controllers/Dashboard.php 209
+ERROR - 2023-06-15 12:16:44 --> Severity: 4096 --> Object of class CI_DB_mysqli_result could not be converted to string /home/www/html/jamukuat/application/controllers/Dashboard.php 209
+ERROR - 2023-06-15 12:16:51 --> Severity: 4096 --> Object of class CI_DB_mysqli_result could not be converted to string /home/www/html/jamukuat/application/controllers/Dashboard.php 209
+ERROR - 2023-06-15 12:17:07 --> Severity: 4096 --> Object of class CI_DB_mysqli_result could not be converted to string /home/www/html/jamukuat/application/controllers/Dashboard.php 209
+ERROR - 2023-06-15 14:11:10 --> Severity: 4096 --> Object of class CI_DB_mysqli_result could not be converted to string /home/www/html/jamukuat/application/controllers/Kua.php 46
+ERROR - 2023-06-15 14:12:42 --> Severity: 4096 --> Object of class CI_DB_mysqli_result could not be converted to string /home/www/html/jamukuat/application/controllers/Kua.php 46
+ERROR - 2023-06-15 14:22:12 --> Severity: 4096 --> Object of class CI_DB_mysqli_result could not be converted to string /home/www/html/jamukuat/application/controllers/Kua.php 46
+ERROR - 2023-06-15 14:42:25 --> Severity: 4096 --> Object of class CI_DB_mysqli_result could not be converted to string /home/www/html/jamukuat/application/controllers/Kua.php 46
+ERROR - 2023-06-15 14:53:57 --> Severity: 4096 --> Object of class CI_DB_mysqli_result could not be converted to string /home/www/html/jamukuat/application/controllers/Dashboard.php 498
+ERROR - 2023-06-15 14:54:47 --> Severity: 4096 --> Object of class CI_DB_mysqli_result could not be converted to string /home/www/html/jamukuat/application/controllers/Kua.php 170
+ERROR - 2023-06-15 14:54:59 --> Severity: 4096 --> Object of class CI_DB_mysqli_result could not be converted to string /home/www/html/jamukuat/application/controllers/Dashboard.php 498
+ERROR - 2023-06-15 16:18:04 --> 404 Page Not Found: Filemanager/index
+ERROR - 2023-06-15 16:18:14 --> 404 Page Not Found: Laravel-filemanager/index
+ERROR - 2023-06-15 16:22:34 --> Severity: 4096 --> Object of class CI_DB_mysqli_result could not be converted to string /home/www/html/jamukuat/application/controllers/Kua.php 46
+ERROR - 2023-06-15 16:26:29 --> Severity: 4096 --> Object of class CI_DB_mysqli_result could not be converted to string /home/www/html/jamukuat/application/controllers/Dashboard.php 209

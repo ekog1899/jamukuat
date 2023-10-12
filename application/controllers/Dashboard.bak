@@ -1,0 +1,397 @@
+<?php
+defined('BASEPATH') OR exit('No direct script access allowed');
+
+class Dashboard extends CI_Controller {
+    public function __construct(){
+		parent::__construct();
+        $this->load->model('Dashboard_model');
+        $this->load->model('Api_m');
+        $this->basic->squrity();
+	}
+ 
+	// public function index(){
+ //        $group=(int)base64_decode($this->session->userdata('group'));
+ //        //echo $group;exit;
+ //        if($group==0 OR $group==2){
+ //            $this->dashboard_pta();
+ //        }else{
+ //            $this->dashboard_pa();
+ //        }
+ //    }
+
+    public function index(){
+       $infolog= infoLogin();
+		$group_id= $infolog['group_id'];
+		$instansi_id= 	$infolog['instansi_id'];
+		$pengadilan_id= 	$infolog['pengadilan_id'];
+		$menu = array (
+            'menu' => 'Dashboard',
+            'submenu' => '',
+            );
+			 _unsetsesiMenu();	_setsesiMenu($menu);
+		
+		
+        if($group_id==1 and $instansi_id==1){
+            $this->dashboard_pta();   
+
+            
+        }elseif($group_id==4 and $instansi_id==6){
+             $this->dashboard_dukcapil();
+        }elseif($group_id==5 and $instansi_id==2){
+             $this->dashboard_kua();
+        }
+		elseif($group_id==4 and $instansi_id==2){
+            //rint_r(infoLogin());
+            //close();
+              $this->dashboard_kemenag();
+        }
+		elseif($group_id==4 and $instansi_id==7){
+              $this->dashboard_bkd();
+        }
+		else{
+            $this->dashboard_pa();
+        }
+        //print_r($this->session->userdata);
+        //print_r($instansi_id);
+        //print_r(infoLogin());
+    }
+
+    public function dashboard_pta(){
+        $data['title']          = 'Dashboard';
+        $data['titlemenu']      = 'Admin';
+        $data['count_satker']   = $this->getsatker();
+        $data['count_perkara_eksekusi']   = $this->getperkara_eksekusi();
+        $data['perkara_eksekusi_selesai']   = $this->Dashboard_model->get_perkara_eksekusi_where("status_eksekusi_text='Selesai' OR status_eksekusi_text='Pencabutan Permohonan Eksekusi'");
+        $data['count_perkara_eksekusi_ht']   = $this->getperkara_eksekusi_ht();
+        $data['perkara_eksekusi_ht_selesai']   = $this->Dashboard_model->get_perkara_eksekusi_ht_where("status_eksekusi_text='Selesai'  OR status_eksekusi_text='Pencabutan Permohonan Eksekusi'");
+        $data['count_user']   = $this->getuser();
+
+        $data['singkron_all']   = "singkron_all()";
+        $data['singkron_eksekusi']   = "singkron_eksekusi()";
+        $data['singkron_eksekusi_ht']   = "singkron_eksekusi_ht()";
+        $data['singkron_pihak']   = "singkron_pihak()";
+
+        $dtchart = $this->getchart();
+        $yr = '';
+        $val = '';
+        foreach ($dtchart as $dt){
+            if($yr == ''){
+                $yr = '"'.$dt['yr'].'"';
+                $val = $dt['jml'];
+            }else{
+                $yr .= ',"'.$dt['yr'].'"';
+                $val .= ','.$dt['jml'];
+            }
+        }
+        $data['tahun'] = $yr;
+        $data['val'] = $val;
+
+        $this->load->view('header', $data);
+        $this->load->view('topbar', $data);
+        $this->load->view('dashboard/dashboard', $data);
+        $this->load->view('footer');
+    }
+    public function dashboard_pa(){
+		
+		$infolog= infoLogin();
+		$group_id= $infolog['group_id'];
+		$instansi_id= 	$infolog['instansi_id'];
+		$pengadilan_id= 	$infolog['pengadilan_id'];
+		$mitra_id= 	$infolog['mitra_id'];
+		$user_id= $infolog['userid'];
+        $pa_id=$pengadilan_id;
+        //print_r(infoLogin());
+		
+		
+        //echo $pa_id;
+        $data['title']          = 'Dashboard';
+        $data['titlemenu']      = 'Admin';
+        $data['count_satker']   = $this->getsatker();
+        $data['count_perkara_eksekusi']   = $this->Dashboard_model->get_perkara_eksekusi_where("pa_id=$pa_id");
+        $data['perkara_eksekusi_selesai']   = $this->Dashboard_model->get_perkara_eksekusi_where("(status_eksekusi_text='Selesai' OR status_eksekusi_text='Pencabutan Permohonan Eksekusi') AND pa_id=$pa_id");
+        $data['perkara_eksekusi_dalam_proses']   = $this->Dashboard_model->get_perkara_eksekusi_where("(status_eksekusi_text<> 'Selesai' OR status_eksekusi_text <>'Pencabutan Permohonan Eksekusi' OR status_eksekusi_text <>'Menggantung') AND pa_id=$pa_id");
+        $data['count_perkara_eksekusi_ht']   = $this->Dashboard_model->get_perkara_eksekusi_ht_where("pa_id=$pa_id");
+        $data['perkara_eksekusi_ht_selesai']   = $this->Dashboard_model->get_perkara_eksekusi_ht_where("(status_eksekusi_text='Selesai' OR status_eksekusi_text='Pencabutan Permohonan Eksekusi') AND pa_id=$pa_id");
+        $data['perkara_eksekusi_ht_dalam_proses']   = $this->Dashboard_model->get_perkara_eksekusi_ht_where("(status_eksekusi_text<> 'Selesai' OR status_eksekusi_text <>'Pencabutan Permohonan Eksekusi' OR status_eksekusi_text <>'Menggantung') AND pa_id=$pa_id");
+
+        $data['singkron_all']   = "singkron_all()";
+        $data['singkron_eksekusi']   = "singkron_eksekusi()";
+        $data['singkron_eksekusi_ht']   = "singkron_eksekusi_ht()";
+        $data['singkron_pihak']   = "singkron_pihak()";
+        $data['count_user']   = $this->getuser();
+        $dtchart = $this->getchart();
+        $yr = '';
+        $val = '';
+        foreach ($dtchart as $dt){
+            if($yr == ''){
+                $yr = '"'.$dt['yr'].'"';
+                $val = $dt['jml'];
+            }else{
+                $yr .= ',"'.$dt['yr'].'"';
+                $val .= ','.$dt['jml'];
+            }
+        }
+        $data['tahun'] = $yr;
+        $data['val'] = $val;
+
+        $this->load->view('header', $data);
+        $this->load->view('topbar', $data);
+        $this->load->view('dashboard/dashboard', $data);
+        $this->load->view('footer');
+    }
+
+
+     /*-----------------Edited By Mas21------------------------*/    
+        public function dashboard_dukcapil(){
+
+        $pa_id=(int)base64_decode($this->session->userdata('pa_id'));
+        $mitra_id=(int)base64_decode($this->session->userdata('mitra_id'));
+        //echo $pa_id;
+
+         $data['title']          = 'Dashboard';
+         $data['titlemenu']      = 'Admin';
+        
+         $data['capil']= $this->Api_m->get_capil();
+
+
+        $this->load->view('header', $data);
+        $this->load->view('topbar', $data);
+        $this->load->view('dashboard/dash_dukcapil', $data);
+        $this->load->view('footer');
+    }
+	
+	 public function load_capil()
+        {   
+
+            $q = $this->Api_m->capil_total();
+            $no = $_POST['start'];
+            $d = array();
+            foreach($q->result_array() as $h){
+                $aksi = '';
+                $row = array();
+                $jum=strlen($h['id']);
+                $no++;
+                $tanggal_putusan=tgl_indo($h['tanggal_putusan']);
+                $tanggal_akta_cerai=tgl_indo($h['tanggal_akta_cerai']);
+                $row[] = $no;
+                $row[] = $h['nama'].'<br>'.$h['nik'];
+                $row[] = $h['alamat'];
+                $row[] = $h['nomor_perkara'].'<br>'.$tanggal_putusan;
+                $row[] = $h['nomor_akta_cerai'].'<br>'.$tanggal_akta_cerai;
+                 if ($h['jenis_pihak']==1){
+                                $jenis_pihak='Penggugat/Pemohon';
+                            }elseif ($row['jenis_pihak']==2){
+                                $jenis_pihak='Tergugat/Termohon';
+                            }
+                $row[] = $h['jenis_perkara_text'].'<br>'.$jenis_pihak;
+                //$row[] = '';
+
+                // $url=base_url('Akta_cerai/update/'.$h['id']);
+                // $url2=base_url('Akta_cerai/hapus/'.$h['id']);
+                 $url1=$h['id'];
+                 $url2=$h['jenis_pihak'];
+                 $aksi = '<a href="#" data-toggle="modal" data-target="#Modal'.$url.'"><button class="btn btn-primary">Update</button></a>';
+                 $aksi2 = '<button class="btn btn-primary" onclick=update("'.$url1.'","'.$url2.'")>Update</button>';  
+                // $aksi = '<a href="'.$url.'" ><i class="fa fa-pencil">Ubah</i></a><a href="'.$url2.'" onClick="return confirmDialog()"><i class="fa fa-trash">Hapus</i></a>';    
+
+                $row[] = $aksi2;
+                // $row[] = $h['file'];;
+                $d[] = $row;
+            }
+            $f = $this->Api_m->capil_countfiltered();
+            $g = $this->Api_m->capil_countall();
+            $output= array( "draw" => $_POST['draw'], 
+                "recordsTotal" => $f['total'],
+                "recordsFiltered" => $g['total'],
+                "data" => $d);
+            header('Access-Control-Allow-Origin: *');
+            header('Content-Type: application/json');
+            echo json_encode($output);
+
+        }
+
+
+    public function load_form_tanggal()
+    {   
+
+        $id=$this->input->post('id');
+        $jenis_pihak=$this->input->post('jenis_pihak');
+        $data['jenis_pihak']=$jenis_pihak;
+        $data['id']=$id;
+        //print_r($data);
+        $this->load->view('dashboard/popup_form_tgl', $data);
+    }
+
+    public function simpan_tanggal()
+    {   
+
+        $mitra_id=(int)base64_decode($this->session->userdata('mitra_id'));
+        $id=$this->input->post('id');
+        $jenis_pihak=$this->input->post('jenis_pihak');
+        $aksi=$this->input->post('aksi').'_pihak'.$jenis_pihak;
+        $tanggal=$this->input->post('tanggal');
+        $capil='capil_pihak'.$jenis_pihak;
+
+        $update_data=array(
+               $aksi =>$tanggal
+               ,$capil =>$mitra_id
+           );
+      // print_r($_POST);
+      // exit();
+
+        $where="id=".$id;
+         $this->Dashboard_model->update_data($where, "perkara_akta_cerai", $update_data);
+
+         if($this->input->post('aksi')=='tanggal_permohonan'){
+
+         redirect('Dashboard/dashboard_dukcapil');
+         }else{
+            
+         redirect('Dashboard/capil_ditangani');
+         }
+    }
+
+    public function capil_ditangani(){
+
+        $pa_id=(int)base64_decode($this->session->userdata('pengadilan_id'));
+        $mitra_id=(int)base64_decode($this->session->userdata('mitra_id'));
+        //echo $pa_id;
+
+        $data['title']          = 'Dashboard';
+        $data['titlemenu']      = 'Admin';
+        
+        $data['capil']= $this->Api_m->get_capil_ditangani($mitra_id);
+
+
+        $this->load->view('header', $data);
+        $this->load->view('topbar', $data);
+        $this->load->view('dashboard/dash_dukcapil_ditangani', $data);
+        $this->load->view('footer');
+    }
+    
+        public function dashboard_bkd(){
+        $pa_id=(int)base64_decode($this->session->userdata('pengadilan_id'));
+        $mitra_id=(int)base64_decode($this->session->userdata('mitra_id'));
+        //print_r ($mitra_id);
+        $data['title']          = 'Dashboard';
+        $data['titlemenu']      = 'BKD';
+        $whereconditon = $mitra_id;
+        $data['pns']= $this->Dashboard_model->get_pns($whereconditon);
+        //print_r ($data['pns']);
+        //exit();
+        $this->load->view('header', $data);
+        $this->load->view('topbar', $data);
+        $this->load->view('dashboard/dash_bkd', $data);
+        $this->load->view('footer');
+    }
+    
+    public function proses_pns($id)
+        {   
+            $data['status_lapor']='1';
+            $where = array('id' => $id );
+            $res = $this->Dashboard_model->proses_pns($where,'perkara_pendaftaran_pns',$data);
+            //print_r($where);
+            //exit();
+            redirect('dashboard');
+
+        }
+
+/*-------------------END Edited By Mas21------------------------*/
+
+
+     public function bkd_putusan(){
+        $pa_id=(int)base64_decode($this->session->userdata('pengadilan_id'));
+        $mitra_id=(int)base64_decode($this->session->userdata('mitra_id'));
+
+        $data['title']          = 'Dashboard';
+        $data['titlemenu']      = 'BKD';
+        $whereconditon = $mitra_id;
+        $data['pns']= $this->Dashboard_model->get_pns_putusan($whereconditon);
+        // print_r($data['pns']);
+        // exit();
+        // foreach ($data['pns']->result_array() as $key) {
+        //      echo $key['nama_pa'].'<br>';
+        //     }
+        //     exit();
+
+        //print_r ($data['pns']);
+        //exit();
+        $this->load->view('header', $data);
+        $this->load->view('topbar', $data);
+        $this->load->view('dashboard/dash_bkd_putusan', $data);
+        $this->load->view('footer');
+    }
+
+     public function dashboard_kua(){
+        $pa_id=(int)base64_decode($this->session->userdata('pengadilan_id'));
+        $mitra_id=(int)base64_decode($this->session->userdata('mitra_id'));
+       
+
+        $data['title']          = 'Dashboard';
+        $data['titlemenu']      = 'KUA';
+       
+            $data['kua']=$this->Api_m->get_kua($mitra_id);
+
+            // // print_r($data['kua']);
+            // // exit();
+            // foreach ($data['kua']->result_array() as $key) {
+            //  echo $key['nama_pa'].'<br>';
+            // }
+            // exit();
+
+     
+        $this->load->view('header', $data);
+        $this->load->view('topbar', $data);
+        $this->load->view('dashboard/dash_kua', $data);
+        $this->load->view('footer');
+    }
+
+    public function dashboard_kemenag(){
+
+        $infolog= infoLogin();
+        $group_id= $infolog['group_id'];
+        $instansi_id=   $infolog['instansi_id'];
+        $pengadilan_id=     $infolog['pengadilan_id'];
+        $mitra_id=  $infolog['mitra_id'];
+        $user_id= $infolog['userid'];
+
+
+        $data['title']          = 'Dashboard';
+        $data['titlemenu']      = 'Kemenag';
+       
+            $data['kua']=$this->Api_m->get_kemenag($mitra_id);
+
+     
+        $this->load->view('header', $data);
+        $this->load->view('topbar', $data);
+        $this->load->view('dashboard/dash_kemenag', $data);
+        $this->load->view('footer');
+    }
+
+
+    //-----------------------------------
+
+    function getsatker(){
+        $intcount = $this->Dashboard_model->get_satker();
+        return $intcount->row()->jml;
+    }
+
+    function getperkara_eksekusi(){
+        $intperkara_eksekusi = $this->Dashboard_model->get_perkara_eksekusi();
+        return $intperkara_eksekusi->row()->jml;
+    }
+    function getperkara_eksekusi_ht(){
+        $intperkara_eksekusi = $this->Dashboard_model->get_perkara_eksekusi_ht();
+        return $intperkara_eksekusi->row()->jml;
+    }
+
+    function getuser(){
+        $intcount_user = $this->Dashboard_model->get_user();
+        return $intcount_user->row()->jml;
+    }
+
+    function getchart(){
+        $data = $this->Dashboard_model->get_chart();
+        return $data->result_array();
+    }
+}

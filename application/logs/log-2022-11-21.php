@@ -1,0 +1,43 @@
+<?php defined('BASEPATH') OR exit('No direct script access allowed'); ?>
+
+ERROR - 2022-11-21 10:10:01 --> Severity: Error --> Call to undefined method Api_m::get_data_putusan() /var/www/html/jamukuat/application/controllers/Api.php 222
+ERROR - 2022-11-21 10:19:06 --> Severity: Warning --> json_decode() expects parameter 1 to be string, array given /var/www/html/jamukuat/application/controllers/Singkron.php 71
+ERROR - 2022-11-21 10:19:06 --> Severity: Warning --> json_decode() expects parameter 1 to be string, array given /var/www/html/jamukuat/application/controllers/Singkron.php 199
+ERROR - 2022-11-21 10:19:19 --> Severity: Warning --> json_decode() expects parameter 1 to be string, array given /var/www/html/jamukuat/application/controllers/Singkron.php 71
+ERROR - 2022-11-21 10:19:32 --> Severity: Warning --> json_decode() expects parameter 1 to be string, array given /var/www/html/jamukuat/application/controllers/Singkron.php 199
+ERROR - 2022-11-21 10:19:43 --> Severity: Warning --> json_decode() expects parameter 1 to be string, array given /var/www/html/jamukuat/application/controllers/Singkron.php 71
+ERROR - 2022-11-21 10:19:56 --> Severity: Warning --> json_decode() expects parameter 1 to be string, array given /var/www/html/jamukuat/application/controllers/Singkron.php 199
+ERROR - 2022-11-21 10:20:08 --> Severity: Warning --> json_decode() expects parameter 1 to be string, array given /var/www/html/jamukuat/application/controllers/Singkron.php 71
+ERROR - 2022-11-21 10:20:20 --> Severity: Warning --> json_decode() expects parameter 1 to be string, array given /var/www/html/jamukuat/application/controllers/Singkron.php 199
+ERROR - 2022-11-21 10:20:33 --> Severity: Warning --> json_decode() expects parameter 1 to be string, array given /var/www/html/jamukuat/application/controllers/Singkron.php 71
+ERROR - 2022-11-21 10:20:45 --> Severity: Warning --> json_decode() expects parameter 1 to be string, array given /var/www/html/jamukuat/application/controllers/Singkron.php 199
+ERROR - 2022-11-21 10:20:57 --> Severity: Warning --> json_decode() expects parameter 1 to be string, array given /var/www/html/jamukuat/application/controllers/Singkron.php 71
+ERROR - 2022-11-21 10:21:09 --> Severity: Warning --> json_decode() expects parameter 1 to be string, array given /var/www/html/jamukuat/application/controllers/Singkron.php 199
+ERROR - 2022-11-21 10:21:12 --> Severity: Warning --> json_decode() expects parameter 1 to be string, array given /var/www/html/jamukuat/application/controllers/Singkron.php 71
+ERROR - 2022-11-21 10:21:12 --> Severity: Warning --> json_decode() expects parameter 1 to be string, array given /var/www/html/jamukuat/application/controllers/Singkron.php 199
+ERROR - 2022-11-21 10:21:14 --> Severity: Warning --> json_decode() expects parameter 1 to be string, array given /var/www/html/jamukuat/application/controllers/Singkron.php 71
+ERROR - 2022-11-21 10:21:14 --> Severity: Warning --> json_decode() expects parameter 1 to be string, array given /var/www/html/jamukuat/application/controllers/Singkron.php 199
+ERROR - 2022-11-21 10:21:15 --> Severity: Warning --> json_decode() expects parameter 1 to be string, array given /var/www/html/jamukuat/application/controllers/Singkron.php 277
+ERROR - 2022-11-21 10:21:16 --> Severity: Warning --> json_decode() expects parameter 1 to be string, array given /var/www/html/jamukuat/application/controllers/Singkron.php 435
+ERROR - 2022-11-21 10:21:28 --> Severity: Warning --> json_decode() expects parameter 1 to be string, array given /var/www/html/jamukuat/application/controllers/Singkron.php 277
+ERROR - 2022-11-21 10:21:40 --> Severity: Warning --> json_decode() expects parameter 1 to be string, array given /var/www/html/jamukuat/application/controllers/Singkron.php 435
+ERROR - 2022-11-21 10:21:50 --> Severity: Warning --> json_decode() expects parameter 1 to be string, array given /var/www/html/jamukuat/application/controllers/Singkron.php 277
+ERROR - 2022-11-21 10:22:02 --> Severity: Warning --> json_decode() expects parameter 1 to be string, array given /var/www/html/jamukuat/application/controllers/Singkron.php 435
+ERROR - 2022-11-21 10:22:15 --> Severity: Warning --> json_decode() expects parameter 1 to be string, array given /var/www/html/jamukuat/application/controllers/Singkron.php 277
+ERROR - 2022-11-21 10:22:27 --> Severity: Warning --> json_decode() expects parameter 1 to be string, array given /var/www/html/jamukuat/application/controllers/Singkron.php 435
+ERROR - 2022-11-21 10:22:40 --> Severity: Warning --> json_decode() expects parameter 1 to be string, array given /var/www/html/jamukuat/application/controllers/Singkron.php 277
+ERROR - 2022-11-21 10:22:52 --> Severity: Warning --> json_decode() expects parameter 1 to be string, array given /var/www/html/jamukuat/application/controllers/Singkron.php 435
+ERROR - 2022-11-21 10:23:04 --> Severity: Warning --> json_decode() expects parameter 1 to be string, array given /var/www/html/jamukuat/application/controllers/Singkron.php 277
+ERROR - 2022-11-21 10:23:16 --> Severity: Warning --> json_decode() expects parameter 1 to be string, array given /var/www/html/jamukuat/application/controllers/Singkron.php 435
+ERROR - 2022-11-21 10:23:20 --> Severity: Warning --> json_decode() expects parameter 1 to be string, array given /var/www/html/jamukuat/application/controllers/Singkron.php 277
+ERROR - 2022-11-21 10:23:20 --> Severity: Warning --> json_decode() expects parameter 1 to be string, array given /var/www/html/jamukuat/application/controllers/Singkron.php 435
+ERROR - 2022-11-21 10:23:24 --> Severity: Warning --> json_decode() expects parameter 1 to be string, array given /var/www/html/jamukuat/application/controllers/Singkron.php 277
+ERROR - 2022-11-21 10:23:24 --> Severity: Warning --> json_decode() expects parameter 1 to be string, array given /var/www/html/jamukuat/application/controllers/Singkron.php 435
+ERROR - 2022-11-21 10:23:24 --> Severity: Warning --> json_decode() expects parameter 1 to be string, array given /var/www/html/jamukuat/application/controllers/Singkron.php 509
+ERROR - 2022-11-21 10:23:36 --> Severity: Warning --> json_decode() expects parameter 1 to be string, array given /var/www/html/jamukuat/application/controllers/Singkron.php 509
+ERROR - 2022-11-21 10:23:48 --> Severity: Warning --> json_decode() expects parameter 1 to be string, array given /var/www/html/jamukuat/application/controllers/Singkron.php 509
+ERROR - 2022-11-21 10:24:02 --> Severity: Warning --> json_decode() expects parameter 1 to be string, array given /var/www/html/jamukuat/application/controllers/Singkron.php 509
+ERROR - 2022-11-21 10:24:14 --> Severity: Warning --> json_decode() expects parameter 1 to be string, array given /var/www/html/jamukuat/application/controllers/Singkron.php 509
+ERROR - 2022-11-21 10:24:28 --> Severity: Warning --> json_decode() expects parameter 1 to be string, array given /var/www/html/jamukuat/application/controllers/Singkron.php 509
+ERROR - 2022-11-21 10:24:30 --> Severity: Warning --> json_decode() expects parameter 1 to be string, array given /var/www/html/jamukuat/application/controllers/Singkron.php 509
+ERROR - 2022-11-21 10:24:34 --> Severity: Warning --> json_decode() expects parameter 1 to be string, array given /var/www/html/jamukuat/application/controllers/Singkron.php 509

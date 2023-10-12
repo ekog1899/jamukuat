@@ -1,0 +1,607 @@
+<?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
+
+class Api_m extends CI_Model {
+	public function __construct(){
+		parent::__construct();
+	}
+
+	function get_data_where($whereconditon,$table){
+		$this->db->where($whereconditon);
+		$query = $this->db->get($table); 
+		return $query;
+	}
+
+	function get_data($table){
+		$query = $this->db->get($table); 
+		return $query;
+	}
+
+
+	function get_data_daftar(){
+		$sql="
+		SELECT a.*, b.`nama_satker`, b.`email_satker`, c.`nama` as nama_pa, a.id as ids FROM perkara_pendaftaran_pns a 
+		JOIN master_mitra b ON a.`unit_kerja`=b.`mitra_id`
+		JOIN pengadilan_agama c ON a.`kd_satker`=c.`id`
+		WHERE a.`kirim_email`=0
+		";
+		$query = $this->db->query($sql); 
+		return $query;	
+	}
+
+
+
+
+	function get_capil2($mitra_id){
+
+		$get_kode_wil=$this->get_data_where(array('mitra_id'=>$mitra_id),'master_mitra_kodewilayah')->row_array();
+		$kode_wil=$get_kode_wil['kode_wilayah'];
+		$sql="
+		SELECT * FROM
+		( SELECT '1' AS jenis_pihak,a.`nama_pihak1` AS nama, a.`nik_pihak1` AS nik, a.`alamat_pihak1` AS alamat, a.`pekerjaan_pihak1` AS pekerjaan, a.`tempatlahir_pihak1` AS tempat_lahir, a.`tanggallahir_pihak1` AS tanggal_lahir,
+		a.`nomor_perkara`,a.`tanggal_putusan`, a.`nomor_akta_cerai`,a.`tanggal_akta_cerai`, a.`jenis_perkara_text`, a.`kd_satker`, 
+		a.`no_kutipan_akta_nikah`, a.`tgl_kutipan_akta_nikah`, a.`id` AS ids
+		FROM perkara_akta_cerai a 
+		WHERE a.`nik_pihak1` LIKE '".$kode_wil."%'
+
+		UNION ALL
+		SELECT '2' AS jenis_pihak, a.`nama_pihak2` AS nama, a.`nik_pihak2` AS nik, a.`alamat_pihak2` AS alamat, a.`pekerjaan_pihak2` AS pekerjaan, a.`tempatlahir_pihak2` AS tempat_lahir, a.`tanggallahir_pihak2` AS tanggal_lahir,
+		a.`nomor_perkara`,  a.`tanggal_putusan`, a.`nomor_akta_cerai`,a.`tanggal_akta_cerai`, a.`jenis_perkara_text`, a.`kd_satker`, 
+		a.`no_kutipan_akta_nikah`, a.`tgl_kutipan_akta_nikah`, a.`id` AS ids 
+		FROM perkara_akta_cerai a 
+		WHERE a.`nik_pihak2` LIKE '".$kode_wil."%')
+		AS dum
+		ORDER BY ids DESC
+		";
+
+		$query = $this->db->query($sql); 
+		return $query;	
+	}
+
+	function get_capil(){
+
+		//$get_kode_wil=$this->get_data_where(array('mitra_id'=>$mitra_id),'master_mitra_kodewilayah')->row_array();
+		//$kode_wil=$get_kode_wil['kode_wilayah'];
+		$sql="
+		SELECT * FROM
+		( SELECT '1' AS jenis_pihak,a.`nama_pihak1` AS nama, a.`nik_pihak1` AS nik, a.`alamat_pihak1` AS alamat, a.`pekerjaan_pihak1` AS pekerjaan, a.`tempatlahir_pihak1` AS tempat_lahir, a.`tanggallahir_pihak1` AS tanggal_lahir,
+		a.`nomor_perkara`,a.`tanggal_putusan`, a.`nomor_akta_cerai`,a.`tanggal_akta_cerai`, a.`jenis_perkara_text`, a.`kd_satker`, 
+		a.`no_kutipan_akta_nikah`, a.`tgl_kutipan_akta_nikah`, a.`id` AS ids, a.status_pihak1 as status_pihak, capil_pihak1 as capil, id
+		FROM perkara_akta_cerai a 
+		where capil_pihak1 is null
+
+		UNION ALL
+		SELECT '2' AS jenis_pihak, a.`nama_pihak2` AS nama, a.`nik_pihak2` AS nik, a.`alamat_pihak2` AS alamat, a.`pekerjaan_pihak2` AS pekerjaan, a.`tempatlahir_pihak2` AS tempat_lahir, a.`tanggallahir_pihak2` AS tanggal_lahir,
+		a.`nomor_perkara`,  a.`tanggal_putusan`, a.`nomor_akta_cerai`,a.`tanggal_akta_cerai`, a.`jenis_perkara_text`, a.`kd_satker`, 
+		a.`no_kutipan_akta_nikah`, a.`tgl_kutipan_akta_nikah`, a.`id` AS ids , a.status_pihak2 as status_pihak, capil_pihak2 as capil,id
+		FROM perkara_akta_cerai a 
+		where capil_pihak2 is null)
+		AS dum
+		ORDER BY ids DESC
+		";
+
+		$query = $this->db->query($sql); 
+		return $query;	
+	}
+
+	
+
+	function get_capil_ditangani($mitra_id){
+		
+		$sql="
+		SELECT * FROM
+		( SELECT '1' AS jenis_pihak,a.`nama_pihak1` AS nama, a.`nik_pihak1` AS nik, a.`alamat_pihak1` AS alamat, a.`pekerjaan_pihak1` AS pekerjaan, a.`tempatlahir_pihak1` AS tempat_lahir, a.`tanggallahir_pihak1` AS tanggal_lahir,
+		a.`nomor_perkara`,a.`tanggal_putusan`, a.`nomor_akta_cerai`,a.`tanggal_akta_cerai`, a.`jenis_perkara_text`, a.`kd_satker`, 
+		a.`no_kutipan_akta_nikah`, a.`tgl_kutipan_akta_nikah`, a.`id` AS ids, a.status_pihak1 as status_pihak, capil_pihak1 as capil,tanggal_permohonan_pihak1 as tanggal_permohonan, tanggal_pengambilan_pihak1 as tanggal_pengambilan, id
+		FROM perkara_akta_cerai a 
+		where capil_pihak1='".$mitra_id."'
+
+		UNION ALL
+		SELECT '2' AS jenis_pihak, a.`nama_pihak2` AS nama, a.`nik_pihak2` AS nik, a.`alamat_pihak2` AS alamat, a.`pekerjaan_pihak2` AS pekerjaan, a.`tempatlahir_pihak2` AS tempat_lahir, a.`tanggallahir_pihak2` AS tanggal_lahir,
+		a.`nomor_perkara`,  a.`tanggal_putusan`, a.`nomor_akta_cerai`,a.`tanggal_akta_cerai`, a.`jenis_perkara_text`, a.`kd_satker`, 
+		a.`no_kutipan_akta_nikah`, a.`tgl_kutipan_akta_nikah`, a.`id` AS ids , a.status_pihak2 as status_pihak, capil_pihak2 as capil,tanggal_permohonan_pihak2 as tanggal_permohonan, tanggal_pengambilan_pihak2 as tanggal_pengambilan, id
+		FROM perkara_akta_cerai a 
+		where capil_pihak2='".$mitra_id."')
+		AS dum
+		ORDER BY ids DESC
+		";
+
+		$query = $this->db->query($sql); 
+		return $query;	
+	}
+
+	function monitoring_ac(){
+		
+		$sql="
+		SELECT c.`nama`, COUNT(b.`id`) AS jum FROM pengadilan_agama c
+		LEFT JOIN  perkara_akta_cerai b ON b.`kd_satker`=c.`id`
+		GROUP BY c.`nama`
+		";
+
+		$query = $this->db->query($sql); 
+		return $query;	
+	}
+
+	function detail_monitoring_ac($kd_satker){
+		
+		$sql="
+		SELECT * FROM perkara_akta_cerai b where b.kd_satker=$kd_satker
+		";
+
+		$query = $this->db->query($sql); 
+		return $query;	
+	}
+	function monitoring_ac_pa($pa_id){
+		
+		$sql="
+		SELECT COUNT(b.`id`) AS jum FROM perkara_akta_cerai b
+		where b.kd_satker=$pa_id
+		";
+
+		$query = $this->db->query($sql); 
+		return $query;	
+	}
+
+	function monitoring_bkd_pa($pa_id){
+		
+		$sql="
+		SELECT COUNT(a.`id`) AS jum FROM perkara_pendaftaran_pns a
+		WHERE a.`status_lapor`=1 and a.kd_satker=$pa_id
+		";
+
+		$query = $this->db->query($sql); 
+		return $query;	
+	}
+
+	function detail_monitoring_bkd_pa($pa_id){
+		
+		$sql="
+		SELECT * FROM perkara_pendaftaran_pns a
+		LEFT JOIN  master_mitra b ON a.`unit_kerja`=b.mitra_id
+		WHERE a.`status_lapor`=1 and a.kd_satker=$pa_id
+		";
+
+		$query = $this->db->query($sql); 
+		return $query;	
+	}
+
+	function monitoring_pns_pendaftaran($pa_id){
+		
+		$sql="
+		
+		SELECT count(a.id) as jum from perkara_pendaftaran_pns a 
+		where a.kd_satker=$pa_id
+		";
+
+		$query = $this->db->query($sql); 
+		return $query;	
+	}
+
+	function detail_monitoring_pns_pendaftaran($pa_id){
+		
+		$sql="
+		
+		SELECT * from perkara_pendaftaran_pns a 
+		LEFT JOIN  master_mitra b ON a.`unit_kerja`=b.mitra_id
+		where a.kd_satker=$pa_id
+		";
+
+		$query = $this->db->query($sql); 
+		return $query;	
+	}
+
+	function detail_monitoring_pns_putusan($pa_id){
+		
+		$sql="
+		
+		SELECT * from perkara_putusan_pns a 
+		LEFT JOIN  master_mitra b ON a.`unit_kerja`=b.mitra_id
+		where a.kd_satker=$pa_id
+		";
+
+		$query = $this->db->query($sql); 
+		return $query;	
+	}
+
+	function monitoring_pns_putusan($pa_id){
+		
+		$sql="
+		
+		SELECT count(a.id) as jum from perkara_putusan_pns a 
+		where a.kd_satker=$pa_id
+		";
+
+		$query = $this->db->query($sql); 
+		return $query;	
+	}
+
+	function kirim_data_pa($pa_id){
+		
+		$sql="
+		SELECT c.nama, (SELECT tanggal_kirim FROM log_kirim b WHERE b.kd_satker=c.id ORDER BY tanggal_kirim DESC LIMIT 1 ) AS tgl FROM pengadilan_agama c where c.id=$pa_id
+
+		";
+
+		$query = $this->db->query($sql); 
+		return $query;	
+	}
+
+	function monitoring_capil_pa($pa_id){
+		
+		$sql="
+		SELECT COUNT(id) AS jum FROM
+		( SELECT '1' AS jenis_pihak,a.`nama_pihak1` AS nama, a.`nik_pihak1` AS nik, a.`alamat_pihak1` AS alamat, a.`pekerjaan_pihak1` AS pekerjaan, a.`tempatlahir_pihak1` AS tempat_lahir, a.`tanggallahir_pihak1` AS tanggal_lahir,
+		a.`nomor_perkara`,a.`tanggal_putusan`, a.`nomor_akta_cerai`,a.`tanggal_akta_cerai`, a.`jenis_perkara_text`, a.`kd_satker`, 
+		a.`no_kutipan_akta_nikah`, a.`tgl_kutipan_akta_nikah`, a.`id` AS ids, a.status_pihak1 AS status_pihak, capil_pihak1 AS capil, id
+		FROM perkara_akta_cerai a 
+		WHERE capil_pihak1 IS NOT NULL AND a.`kd_satker`=$pa_id
+
+		UNION ALL
+		SELECT '2' AS jenis_pihak, a.`nama_pihak2` AS nama, a.`nik_pihak2` AS nik, a.`alamat_pihak2` AS alamat, a.`pekerjaan_pihak2` AS pekerjaan, a.`tempatlahir_pihak2` AS tempat_lahir, a.`tanggallahir_pihak2` AS tanggal_lahir,
+		a.`nomor_perkara`,  a.`tanggal_putusan`, a.`nomor_akta_cerai`,a.`tanggal_akta_cerai`, a.`jenis_perkara_text`, a.`kd_satker`, 
+		a.`no_kutipan_akta_nikah`, a.`tgl_kutipan_akta_nikah`, a.`id` AS ids , a.status_pihak2 AS status_pihak, capil_pihak2 AS capil,id
+		FROM perkara_akta_cerai a 
+		WHERE capil_pihak2 IS NOT NULL AND a.`kd_satker`=$pa_id)
+		AS dum
+		ORDER BY id DESC
+		";
+
+		$query = $this->db->query($sql); 
+		return $query;	
+	}
+
+	function detail_monitoring_capil($pa_id){
+		
+		$sql="
+		SELECT '1' AS jenis_pihak,a.`nama_pihak1` AS nama, a.`nik_pihak1` AS nik, a.`alamat_pihak1` AS alamat, a.`pekerjaan_pihak1` AS pekerjaan, a.`tempatlahir_pihak1` AS tempat_lahir, a.`tanggallahir_pihak1` AS tanggal_lahir,
+		a.`nomor_perkara`,a.`tanggal_putusan`, a.`nomor_akta_cerai`,a.`tanggal_akta_cerai`, a.`jenis_perkara_text`, a.`kd_satker`, 
+		a.`no_kutipan_akta_nikah`, a.`tgl_kutipan_akta_nikah`, a.`id` AS ids, a.status_pihak1 AS status_pihak, capil_pihak1 AS capil, id,nama_satker,tanggal_permohonan_pihak1 as tanggal_permohonan_pihak, tanggal_pengambilan_pihak1 as tanggal_pengambilan_pihak
+		FROM perkara_akta_cerai a 
+		join master_mitra b on a.capil_pihak1=b.mitra_id
+		WHERE capil_pihak1 IS NOT NULL AND a.`kd_satker`=$pa_id
+
+		UNION ALL
+		SELECT '2' AS jenis_pihak, a.`nama_pihak2` AS nama, a.`nik_pihak2` AS nik, a.`alamat_pihak2` AS alamat, a.`pekerjaan_pihak2` AS pekerjaan, a.`tempatlahir_pihak2` AS tempat_lahir, a.`tanggallahir_pihak2` AS tanggal_lahir,
+		a.`nomor_perkara`,  a.`tanggal_putusan`, a.`nomor_akta_cerai`,a.`tanggal_akta_cerai`, a.`jenis_perkara_text`, a.`kd_satker`, 
+		a.`no_kutipan_akta_nikah`, a.`tgl_kutipan_akta_nikah`, a.`id` AS ids , a.status_pihak2 AS status_pihak, capil_pihak2 AS capil,id,nama_satker,tanggal_permohonan_pihak2 as tanggal_permohonan_pihak, tanggal_pengambilan_pihak2 as tanggal_pengambilan_pihak
+		FROM perkara_akta_cerai a 
+		join master_mitra b on a.capil_pihak2=b.mitra_id
+		WHERE capil_pihak2 IS NOT NULL AND a.`kd_satker`=$pa_id
+		";
+
+		$query = $this->db->query($sql); 
+		return $query;	
+	}
+
+	function monitoring_bkd(){
+		
+		$sql="
+		SELECT b.`nama_satker`, COUNT(a.`id`) AS jum FROM perkara_pendaftaran_pns a
+		LEFT JOIN  master_mitra b ON a.`unit_kerja`=b.mitra_id
+		WHERE a.`status_lapor`=1
+		GROUP BY nama_satker
+		";
+
+		$query = $this->db->query($sql); 
+		return $query;	
+	}
+
+	function monitoring_pns(){
+		
+		$sql="
+		SELECT nama_satker, count(id) as jum FROM
+		( SELECT a.`id`, nama_satker
+		FROM perkara_pendaftaran_pns a 
+		LEFT JOIN master_mitra b ON a.`unit_kerja`=b.mitra_id
+		
+
+		UNION ALL
+		SELECT a.`id`, nama_satker from perkara_putusan_pns a 
+		LEFT JOIN master_mitra b ON a.`unit_kerja`=b.mitra_id
+		)
+		AS dum
+		group by nama_satker
+		";
+
+		$query = $this->db->query($sql); 
+		return $query;	
+	}
+
+	function kirim_data(){
+		
+		$sql="
+		SELECT c.nama, (SELECT tanggal_kirim FROM log_kirim b WHERE b.kd_satker=c.id ORDER BY tanggal_kirim DESC LIMIT 1 ) AS tgl FROM pengadilan_agama c
+
+		";
+
+		$query = $this->db->query($sql); 
+		return $query;	
+	}
+
+	function monitoring_capil(){
+		
+		$sql="
+		SELECT nama_satker, COUNT(jenis_pihak) AS jum FROM
+		( SELECT '1' AS jenis_pihak,a.`nama_pihak1` AS nama, a.`nik_pihak1` AS nik, a.`alamat_pihak1` AS alamat, a.`pekerjaan_pihak1` AS pekerjaan, a.`tempatlahir_pihak1` AS tempat_lahir, a.`tanggallahir_pihak1` AS tanggal_lahir,
+		a.`nomor_perkara`,a.`tanggal_putusan`, a.`nomor_akta_cerai`,a.`tanggal_akta_cerai`, a.`jenis_perkara_text`, a.`kd_satker`, 
+		a.`no_kutipan_akta_nikah`, a.`tgl_kutipan_akta_nikah`, a.`id` AS ids, a.status_pihak1 AS status_pihak, capil_pihak1 AS capil, id, b.`nama_satker`
+		FROM perkara_akta_cerai a 
+		JOIN master_mitra b ON a.capil_pihak1=b.mitra_id
+		
+
+		UNION ALL
+		SELECT '2' AS jenis_pihak, a.`nama_pihak2` AS nama, a.`nik_pihak2` AS nik, a.`alamat_pihak2` AS alamat, a.`pekerjaan_pihak2` AS pekerjaan, a.`tempatlahir_pihak2` AS tempat_lahir, a.`tanggallahir_pihak2` AS tanggal_lahir,
+		a.`nomor_perkara`,  a.`tanggal_putusan`, a.`nomor_akta_cerai`,a.`tanggal_akta_cerai`, a.`jenis_perkara_text`, a.`kd_satker`, 
+		a.`no_kutipan_akta_nikah`, a.`tgl_kutipan_akta_nikah`, a.`id` AS ids , a.status_pihak2 AS status_pihak, capil_pihak2 AS capil,id, b.`nama_satker`
+		FROM perkara_akta_cerai a 
+		JOIN master_mitra b ON a.capil_pihak2=b.mitra_id
+		)
+		AS dum
+		GROUP BY nama_satker
+		";
+
+		$query = $this->db->query($sql); 
+		return $query;	
+	}
+
+
+
+	function get_kua($mitra_id){
+
+		$get_key=$this->get_data_where(array('mitra_id'=>$mitra_id),'master_mitra_kua');
+		$where="";
+		$no=1;
+		foreach ($get_key->result_array() as $key) {
+			$aa= $key['key'];
+			if($no==1){
+				$where=" WHERE a.`kua_tempat_nikah` LIKE '%kua ".$aa."%' 
+				OR a.`kua_tempat_nikah` LIKE '%kec. ".$aa."%'
+				OR a.`kua_tempat_nikah` LIKE '%kecamatan ".$aa."%'
+				OR a.`kua_tempat_nikah` LIKE '%kecamatan  ".$aa."%'
+				OR a.`kua_tempat_nikah` LIKE '%kantor urusan agama ".$aa."%'
+				OR a.`kua_tempat_nikah` LIKE '%kantor urusan agama kecamatan ".$aa."%'
+				OR a.`kua_tempat_nikah` LIKE '%kantor urusan agama kec. ".$aa."%'
+				OR a.`kua_tempat_nikah` LIKE '%kantor urusan agama kec ".$aa."%'";
+			}else{
+				$where1=" OR a.`kua_tempat_nikah` LIKE '%kua ".$aa."%' 
+				OR a.`kua_tempat_nikah` LIKE '%kec. ".$aa."%'
+				OR a.`kua_tempat_nikah` LIKE '%kecamatan ".$aa."%'
+				OR a.`kua_tempat_nikah` LIKE '%kecamatan  ".$aa."%'
+				OR a.`kua_tempat_nikah` LIKE '%kantor urusan agama ".$aa."%'
+				OR a.`kua_tempat_nikah` LIKE '%kantor urusan agama kecamatan ".$aa."%'
+				OR a.`kua_tempat_nikah` LIKE '%kantor urusan agama kec. ".$aa."%'
+				OR a.`kua_tempat_nikah` LIKE '%kantor urusan agama kec ".$aa."%'";
+			}
+			
+			//$where=$where.''.$where1; //baru ganti dadi ora guno
+			$no++;
+		}
+		$sql="SELECT a.*, b.nama as nama_pa, a.id as ids
+		FROM perkara_akta_cerai a
+		join pengadilan_agama b on a.kd_satker=b.id";
+
+		$query=$sql.$where;
+
+		$query1 = $this->db->query($query); 
+		return $query1;
+		//return $query;	
+	}
+
+	/* function get_kemenag($pa_id,$mitra_id){
+
+		$get_kua=$this->get_data_where(array('mitra_id'=>$mitra_id, 'group_id'=>4),'master_mitra');
+
+		$where="";
+		$no=1;
+		foreach ($get_kua->result_array() as $row) {
+			
+			$get_key=$this->get_data_where(array('pengadilan_id'=>$row['pengadilan_id']),'master_mitra_kua');
+
+			foreach ($get_key->result_array() as $key) {
+				$aa= $key['key'];
+				if($no==1){
+					$where=" WHERE a.`kua_tempat_nikah` LIKE '%kua ".$aa."%' 
+					OR a.`kua_tempat_nikah` LIKE '%kec. ".$aa."%'
+					OR a.`kua_tempat_nikah` LIKE '%kecamatan ".$aa."%'
+					OR a.`kua_tempat_nikah` LIKE '%kecamatan  ".$aa."%'
+					OR a.`kua_tempat_nikah` LIKE '%kantor urusan agama ".$aa."%'
+					OR a.`kua_tempat_nikah` LIKE '%kantor urusan agama kecamatan ".$aa."%'
+					OR a.`kua_tempat_nikah` LIKE '%kantor urusan agama kec. ".$aa."%'
+					OR a.`kua_tempat_nikah` LIKE '%kantor urusan agama kec ".$aa."%' ";
+				}else{
+					$where1=" OR a.`kua_tempat_nikah` LIKE '%kua ".$aa."%' 
+					OR a.`kua_tempat_nikah` LIKE '%kec. ".$aa."%'
+					OR a.`kua_tempat_nikah` LIKE '%kecamatan ".$aa."%'
+					OR a.`kua_tempat_nikah` LIKE '%kecamatan  ".$aa."%'
+					OR a.`kua_tempat_nikah` LIKE '%kantor urusan agama ".$aa."%'
+					OR a.`kua_tempat_nikah` LIKE '%kantor urusan agama kecamatan ".$aa."%'
+					OR a.`kua_tempat_nikah` LIKE '%kantor urusan agama kec. ".$aa."%'
+					OR a.`kua_tempat_nikah` LIKE '%kantor urusan agama kec ".$aa."%' ";
+				}
+				
+				$where=$where.''.$where1;
+				$no++;
+			}
+
+			//$where=$where.''.$where1;
+
+		}
+
+
+		$sql="SELECT a.*, b.nama as nama_pa, a.id as ids
+		FROM perkara_akta_cerai a
+		join pengadilan_agama b on a.kd_satker=b.id";
+
+		$query=$sql.$where;
+
+		$query1 = $this->db->query($query); 
+		return $query1;
+		//return $query;	
+	} */
+
+	function get_kemenag($mitra_id){
+		try{
+		$get_mitra=$this->get_data_where(array('mitra_id'=>$mitra_id),'master_mitra');
+		$where="";
+		$no=1;
+		foreach ($get_mitra->result_array() as $key){
+			$aa=$key['wilayah_kerja'];
+			if($no==1){
+				$where = " WHERE a.`kua_tempat_nikah` LIKE '%".$aa."%' ";
+			}
+
+		$sql="SELECT a.*, b.nama as nama_pa, a.id as ids
+		FROM perkara_akta_cerai a
+		join pengadilan_agama b on a.kd_satker=b.id";
+
+		$query=$sql.$where;
+
+		$query1 = $this->db->query($query); 
+		return $query1;
+		//return $query;	
+		}
+
+		}catch (Exception $e){
+			return false;
+		}
+
+	}
+
+	function updateAll($table, $data, $kolom, $id){
+		$this->db->where($kolom,$id);
+		$this->db->update($table,$data);
+	}
+
+	public function cek_lapor_bkd($kd_satker){
+		$sql="
+		SELECT * FROM perkara_pendaftaran_pns a 
+		WHERE a.`kd_satker`='".$kd_satker."' and (a.flag=0 OR a.flag IS NULL OR a.flag='') and a.status_lapor=1
+		";
+
+		$query = $this->db->query($sql); 
+
+		foreach ($query->result_array() as $key) {
+
+			$data['flag']='1';
+			$this->updateAll('perkara_pendaftaran_pns',$data,'id',$key['id']); 
+
+		}
+
+
+		return $query;	
+
+	}
+
+	 public function capil_total()
+    {
+        try{
+            $limit = '';
+            if(isset($_POST['length'])){
+                if($_POST['length'] != -1)
+                    $limit = "LIMIT ".$_POST['start'].",".$_POST['length'];
+            };
+
+
+            $keyword = '';
+            if(!empty($_POST['search']['value'])){
+               $keyword = "where (nama LIKE '%".$_POST['search']['value']."%' OR nik LIKE '%".$_POST['search']['value']."%' OR alamat LIKE '%".$_POST['search']['value']."%' OR pekerjaan LIKE '%".$_POST['search']['value']."%' OR nomor_akta_cerai LIKE '%".$_POST['search']['value']."%' OR nomor_perkara LIKE '%".$_POST['search']['value']."%')";
+            }
+
+                if(isset($_POST['order'])) // here order processing
+                {
+                    $index = $_POST['order']['0']['column'];
+                    $field = $_POST["columns"][$index]["name"];
+
+                    $columnIndex = $_POST['order'][0]['column']; // Column index
+                    $columnName = $_POST['columns'][$columnIndex]['data']; // Column name
+                    $columnSortOrder = $_POST['order'][0]['dir']; // asc or desc
+
+                    $order = 'ORDER BY '.$columnName.' '.$_POST['order'][0]['dir'];
+                } 
+                else
+                {
+                    $order = 'ORDER BY ids DESC';
+                }
+
+                $sql="
+                SELECT * FROM
+		( SELECT '1' AS jenis_pihak,a.`nama_pihak1` AS nama, a.`nik_pihak1` AS nik, a.`alamat_pihak1` AS alamat, a.`pekerjaan_pihak1` AS pekerjaan, a.`tempatlahir_pihak1` AS tempat_lahir, a.`tanggallahir_pihak1` AS tanggal_lahir,
+		a.`nomor_perkara`,a.`tanggal_putusan`, a.`nomor_akta_cerai`,a.`tanggal_akta_cerai`, a.`jenis_perkara_text`, a.`kd_satker`, 
+		a.`no_kutipan_akta_nikah`, a.`tgl_kutipan_akta_nikah`, a.`id` AS ids, a.status_pihak1 as status_pihak, capil_pihak1 as capil, id
+		FROM perkara_akta_cerai a 
+		where capil_pihak1 is null 
+		UNION ALL
+		SELECT '2' AS jenis_pihak, a.`nama_pihak2` AS nama, a.`nik_pihak2` AS nik, a.`alamat_pihak2` AS alamat, a.`pekerjaan_pihak2` AS pekerjaan, a.`tempatlahir_pihak2` AS tempat_lahir, a.`tanggallahir_pihak2` AS tanggal_lahir,
+		a.`nomor_perkara`,  a.`tanggal_putusan`, a.`nomor_akta_cerai`,a.`tanggal_akta_cerai`, a.`jenis_perkara_text`, a.`kd_satker`, 
+		a.`no_kutipan_akta_nikah`, a.`tgl_kutipan_akta_nikah`, a.`id` AS ids , a.status_pihak2 as status_pihak, capil_pihak2 as capil,id
+		FROM perkara_akta_cerai a 
+		where capil_pihak2 is null  )
+		AS dum
+		".$keyword."
+		".$order." $limit
+		 ";
+
+                $query = $this->db->query($sql);
+                return $query;
+            }
+            catch(Exception $e){
+            }
+        }
+
+        public function capil_countfiltered()
+        {
+            try{
+
+                $keyword = '';
+                if(!empty($_POST['search']['value'])){
+                    $keyword = "where (nama LIKE '%".$_POST['search']['value']."%' OR nik LIKE '%".$_POST['search']['value']."%' OR alamat LIKE '%".$_POST['search']['value']."%' OR pekerjaan LIKE '%".$_POST['search']['value']."%' OR nomor_akta_cerai LIKE '%".$_POST['search']['value']."%' OR nomor_perkara LIKE '%".$_POST['search']['value']."%')";
+                }
+
+                $sql = "SELECT count(*) as total FROM
+		( SELECT '1' AS jenis_pihak,a.`nama_pihak1` AS nama, a.`nik_pihak1` AS nik, a.`alamat_pihak1` AS alamat, a.`pekerjaan_pihak1` AS pekerjaan, a.`tempatlahir_pihak1` AS tempat_lahir, a.`tanggallahir_pihak1` AS tanggal_lahir,
+		a.`nomor_perkara`,a.`tanggal_putusan`, a.`nomor_akta_cerai`,a.`tanggal_akta_cerai`, a.`jenis_perkara_text`, a.`kd_satker`, 
+		a.`no_kutipan_akta_nikah`, a.`tgl_kutipan_akta_nikah`, a.`id` AS ids, a.status_pihak1 as status_pihak, capil_pihak1 as capil, id
+		FROM perkara_akta_cerai a 
+		where capil_pihak1 is null 
+
+		UNION ALL
+		SELECT '2' AS jenis_pihak, a.`nama_pihak2` AS nama, a.`nik_pihak2` AS nik, a.`alamat_pihak2` AS alamat, a.`pekerjaan_pihak2` AS pekerjaan, a.`tempatlahir_pihak2` AS tempat_lahir, a.`tanggallahir_pihak2` AS tanggal_lahir,
+		a.`nomor_perkara`,  a.`tanggal_putusan`, a.`nomor_akta_cerai`,a.`tanggal_akta_cerai`, a.`jenis_perkara_text`, a.`kd_satker`, 
+		a.`no_kutipan_akta_nikah`, a.`tgl_kutipan_akta_nikah`, a.`id` AS ids , a.status_pihak2 as status_pihak, capil_pihak2 as capil,id
+		FROM perkara_akta_cerai a 
+		where capil_pihak2 is null)
+		AS dum ".$keyword." ";
+                $query = $this->db->query($sql);
+                return $query->row_array();
+            }
+            catch(Exception $e){
+            }
+        }
+
+
+
+        public function capil_countall()
+        {
+            try{
+                $sql = "SELECT count(*) as total FROM
+		( SELECT '1' AS jenis_pihak,a.`nama_pihak1` AS nama, a.`nik_pihak1` AS nik, a.`alamat_pihak1` AS alamat, a.`pekerjaan_pihak1` AS pekerjaan, a.`tempatlahir_pihak1` AS tempat_lahir, a.`tanggallahir_pihak1` AS tanggal_lahir,
+		a.`nomor_perkara`,a.`tanggal_putusan`, a.`nomor_akta_cerai`,a.`tanggal_akta_cerai`, a.`jenis_perkara_text`, a.`kd_satker`, 
+		a.`no_kutipan_akta_nikah`, a.`tgl_kutipan_akta_nikah`, a.`id` AS ids, a.status_pihak1 as status_pihak, capil_pihak1 as capil, id
+		FROM perkara_akta_cerai a 
+		where capil_pihak1 is null
+
+		UNION ALL
+		SELECT '2' AS jenis_pihak, a.`nama_pihak2` AS nama, a.`nik_pihak2` AS nik, a.`alamat_pihak2` AS alamat, a.`pekerjaan_pihak2` AS pekerjaan, a.`tempatlahir_pihak2` AS tempat_lahir, a.`tanggallahir_pihak2` AS tanggal_lahir,
+		a.`nomor_perkara`,  a.`tanggal_putusan`, a.`nomor_akta_cerai`,a.`tanggal_akta_cerai`, a.`jenis_perkara_text`, a.`kd_satker`, 
+		a.`no_kutipan_akta_nikah`, a.`tgl_kutipan_akta_nikah`, a.`id` AS ids , a.status_pihak2 as status_pihak, capil_pihak2 as capil,id
+		FROM perkara_akta_cerai a 
+		where capil_pihak2 is null )
+		AS dum";
+                $query = $this->db->query($sql);
+                return $query->row_array();
+            }
+            catch(Exception $e){
+            }
+        }
+
+
+}
